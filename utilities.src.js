@@ -72,7 +72,7 @@ toggle3.addEventListener('click', () => {
 });
 let is_golds_hide = false;
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'p') {
+    if (e.keyCode === 77) {
         if (floatingWindow.style.display === 'none') {
             floatingWindow.style.display = 'block';
         } else {
