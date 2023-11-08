@@ -1,1 +1,3 @@
-# some_TO_scripts
+# Tanki Online Scripts
+
+Несколько мелких скриптов для игры Танки Онлайн
