@@ -99,10 +99,8 @@ toggle4.addEventListener('click', () => {
 });
 let is_afk = false
 floatingWindow.appendChild(toggle1);
-floatingWindow.appendChild(document.createElement('p'));
+//floatingWindow.appendChild(document.createElement('p'));
 floatingWindow.appendChild(toggle2);
-floatingWindow.appendChild(document.createElement('p'));
 floatingWindow.appendChild(toggle3);
-floatingWindow.appendChild(document.createElement('p'));
 floatingWindow.appendChild(toggle4);
 document.body.appendChild(floatingWindow);
