@@ -1,13 +1,12 @@
 const floatingWindow = document.createElement('div');
-floatingWindow.style.cssText = 'position: fixed; top: 20px; left: 20px; background-color: black; padding: 10px; border: 4px solid #8B00FF; display: none; border-radius: 15px; z-index: 9999; font-size: 20px; color: black;';
+floatingWindow.style.cssText = 'position: fixed; top: 20px; left: 20px; background-color: black; padding: 10px; border: 4px solid #8B00FF; display: none; border-radius: 15px; z-index: 9999; font-size: 20px; color: black;display: flex;flex-direction: column;';
 const toggle1 = document.createElement('div');
 toggle1.textContent = 'Открыть контейнеры';
 toggle1.style.cssText = "background-color: #8B00FF; border-radius: 5px; text-align: center;";
 toggle1.addEventListener('click', () => {
     floatingWindow.style.display = 'none';
     for (var i = 0; i < 1000; i++) {
-        document.querySelector('.ClosedContainerStyle-moreButton')
-            ?.click();
+        document.querySelector('.ClosedContainerStyle-moreButton')?.click();
     }
 });
 let conts_interval;
@@ -80,9 +79,30 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
+
+let afk_interval
+function anti_afk() {
+
+}
+const toggle4 = document.createElement('div');
+toggle4.textContent = 'Анти-афк';
+toggle4.style.cssText = "background-color: red; border-radius: 5px; text-align: center;";
+toggle4.addEventListener('click', () => {
+   is_afk = !is_afk;
+    if (is_afk) {
+        afk_interval = setInterval(anti_afk, 3e4);
+        toggle4.style.backgroundColor = "green";
+    } else {
+        clearInterval(afk_interval);
+        toggle4.style.backgroundColor = "red";
+    }
+});
+let is_afk = false
 floatingWindow.appendChild(toggle1);
 floatingWindow.appendChild(document.createElement('p'));
 floatingWindow.appendChild(toggle2);
 floatingWindow.appendChild(document.createElement('p'));
 floatingWindow.appendChild(toggle3);
+floatingWindow.appendChild(document.createElement('p'));
+floatingWindow.appendChild(toggle4);
 document.body.appendChild(floatingWindow);
