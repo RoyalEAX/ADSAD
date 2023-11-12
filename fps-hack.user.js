@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FPS hack
 // @description  Upgrade your fps in battle
-// @version      1.2
+// @version      1.3
 // @author       N3onTechF0X
 // @match        https://*.tankionline.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tankionline.com
@@ -9,34 +9,4 @@
 // @grant        none
 // ==/UserScript==
 
-var fpsSet = false;
-var pingSet = false;
-
-setInterval(() => {
-    var fpsElement = document.querySelector(".BattleHudFpsComponentStyle-value");
-    var pingElement = document.querySelector('.BattleHudFpsComponentStyle-row:nth-child(2) .BattleHudFpsComponentStyle-value');
-
-    if (!fpsElement || !pingElement) {
-        fpsSet = false;
-        pingSet = false;
-        return;
-    }
-
-    if (!fpsSet) {
-        var newFpsElement = document.createElement("span");
-        newFpsElement.textContent = "500";
-        newFpsElement.style.color = "rgb(136, 206, 81)";
-        fpsElement.style.display = "none";
-        fpsElement.parentNode.insertBefore(newFpsElement, fpsElement.nextSibling);
-        fpsSet = true;
-    }
-
-    if (!pingSet) {
-        var newPingElement = document.createElement("span");
-        newPingElement.textContent = "20";
-        newPingElement.style.color = "rgb(136, 206, 81)";
-        pingElement.style.display = "none";
-        pingElement.parentNode.insertBefore(newPingElement, pingElement.nextSibling);
-        pingSet = true;
-    }
-}, 100);
+var i=!1;setInterval(()=>{var e=document.querySelector(".BattleHudFpsComponentStyle-value");if(!e)return i=!1;if(!i){var t=document.createElement("span");t.textContent=(Math.floor(Math.random() * 5) + 140).toString(),t.style.color="rgb(116, 186, 61)",e.style.display="none",e.parentNode.insertBefore(t,e.nextSibling),i=!0}},100);
