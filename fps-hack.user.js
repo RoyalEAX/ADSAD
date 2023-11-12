@@ -9,4 +9,34 @@
 // @grant        none
 // ==/UserScript==
 
-var i=!1;setInterval(()=>{var e=document.querySelector(".BattleHudFpsComponentStyle-value");if(!e)return i=!1;if(!i){var t=document.createElement("span");t.textContent="500",t.style.color="rgb(136, 206, 81)",e.style.display="none",e.parentNode.insertBefore(t,e.nextSibling),i=!0}},100);
+var fpsSet = false;
+var pingSet = false;
+
+setInterval(() => {
+    var fpsElement = document.querySelector(".BattleHudFpsComponentStyle-value");
+    var pingElement = document.querySelector('.BattleHudFpsComponentStyle-row:nth-child(2) .BattleHudFpsComponentStyle-value');
+
+    if (!fpsElement || !pingElement) {
+        fpsSet = false;
+        pingSet = false;
+        return;
+    }
+
+    if (!fpsSet) {
+        var newFpsElement = document.createElement("span");
+        newFpsElement.textContent = "500";
+        newFpsElement.style.color = "rgb(136, 206, 81)";
+        fpsElement.style.display = "none";
+        fpsElement.parentNode.insertBefore(newFpsElement, fpsElement.nextSibling);
+        fpsSet = true;
+    }
+
+    if (!pingSet) {
+        var newPingElement = document.createElement("span");
+        newPingElement.textContent = "20";
+        newPingElement.style.color = "rgb(136, 206, 81)";
+        pingElement.style.display = "none";
+        pingElement.parentNode.insertBefore(newPingElement, pingElement.nextSibling);
+        pingSet = true;
+    }
+}, 100);
