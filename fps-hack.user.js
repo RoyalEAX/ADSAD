@@ -9,4 +9,4 @@
 // @grant        none
 // ==/UserScript==
 
-var i=!1;setInterval(()=>{var e=document.querySelector(".BattleHudFpsComponentStyle-value");if(!e)return i=!1;if(!i){var t=document.createElement("span");t.textContent="144",t.style.color="rgb(116, 186, 61)",e.style.display="none",e.parentNode.insertBefore(t,e.nextSibling),i=!0}},100);
+var i=!1;setInterval(()=>{var e=document.querySelector(".BattleHudFpsComponentStyle-value");if(!e)return i=!1;if(!i){var t=document.createElement("span");t.textContent="500",t.style.color="rgb(136, 206, 81)",e.style.display="none",e.parentNode.insertBefore(t,e.nextSibling),i=!0}},100);
