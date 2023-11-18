@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Utilities
 // @description  Usefull functions for Tanki Online
-// @version      1.8
-// @author       N3onTechF0X
+// @version      2.1
+// @author       N3onTechF0X, tdsrse
 // @match        https://*.tankionline.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tankionline.com
 // @run-at       document-start
@@ -99,25 +99,11 @@ elm_anti_afk.textContent = "Anti-AFK",
         (is_anti_afk = !is_anti_afk) ? (anti_afk_interval = setInterval(anti_afk, 30e3), elm_anti_afk.style.backgroundColor = "rgb(66 150 66/30%)") : (clearInterval(anti_afk_interval), elm_anti_afk.style.backgroundColor = "transparent")
     });
 // ФПС хак
-let fps_hack_interval, is_fps_hack = !1;
-let fps_inner_interval, TO_fps_elm, fake_fps_elm = document.createElement("span");
-fake_fps_elm.classList.add("fake_fps");
-fake_fps_elm.style.color = "rgb(116, 186, 61)";
-fake_fps_elm.style.display = "none";
+let fps_hack_interval, new_fps_state, TO_fps_elm, is_fps_hack = !1;
 function fps_hack() {
-    TO_fps_elm = document.querySelector(".BattleHudFpsComponentStyle-value");
-    if (!TO_fps_elm) {
-        fake_fps_elm.style.display = "none";
-        return clearInterval(fps_inner_interval);
-    }
-    TO_fps_elm.style.display = "none";
-    fake_fps_elm.style.display = "flex";
-    if (!document.querySelector(".fake_fps")) {
-        TO_fps_elm.parentNode.insertBefore(fake_fps_elm, TO_fps_elm.nextSibling)
-        fps_inner_interval = setInterval(() => {
-            fake_fps_elm.textContent = (Math.floor(3 * Math.random()) + current_fps - 3).toString()
-        }, 1e3);
-    };
+    const fpsElement = document.querySelector(".BattleHudFpsComponentStyle-value");
+    if (fpsElement) fpsElement.textContent = new_fps_state
+    if (is_fps_hack) requestAnimationFrame(fps_hack);
 }
 const elm_fps_hack = document.createElement("div");
 elm_fps_hack.classList.add("toogle", "FPSHack", "general");
@@ -125,15 +111,11 @@ elm_fps_hack.textContent = "FPS hack";
 elm_fps_hack.addEventListener("click", () => {
     is_fps_hack = !is_fps_hack
     if (is_fps_hack) {
-        fps_hack_interval = setInterval(fps_hack, 1e3);
+        fps_hack_interval = setInterval(() => {new_fps_state = (Math.floor(3 * Math.random()) + current_fps - 3).toString()}, 1e3)
+        fps_hack();
         elm_fps_hack.style.backgroundColor = "rgb(66 150 66/30%)";
     } else {
-        const originalFPS = document.querySelector(".BattleHudFpsComponentStyle-value");
-        if (originalFPS) {
-            originalFPS.style.display = "flex";
-        }
-        fake_fps_elm.style.display = "none";
-        clearInterval(fps_hack_interval);
+        clearInterval(fps_hack_interval)
         elm_fps_hack.style.backgroundColor = "transparent";
     }
 });
