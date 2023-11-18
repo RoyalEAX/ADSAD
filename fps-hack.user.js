@@ -47,7 +47,7 @@ function hide_golds() {
         let t = e.querySelector(".BattleMessagesComponentStyle-message");
         if (t) {
             let o = t.innerHTML.toLowerCase();
-            o.includes("золотой") || o.includes("ящик") || o.includes("golden") || o.includes("box") ? e.style.display = "none" : e.style.display = "flex"
+            (o.includes("золотой") || o.includes("ящик") || o.includes("golden") || o.includes("box")) ? e.style.display = "none" : e.style.display = "flex"
         }
     })
 }
@@ -62,7 +62,36 @@ elm_hide_golds.textContent = "Hide Golds",
 // Анти афк
 let anti_afk_interval, is_anti_afk = !1;
 function anti_afk() {
-    
+    document.body.dispatchEvent(new KeyboardEvent("keydown", {
+      bubbles: true,
+      cancelBubble: false,
+      cancelable: true,
+      key: "W",
+      keyCode: 87,
+      which: 87,
+      code: "KeyW",
+      location: 0,
+      altKey: false,
+      ctrlKey: false,
+      metaKey: false,
+      shiftKey: false,
+      repeat: false
+    }));
+    document.body.dispatchEvent(new KeyboardEvent("keyup", {
+      bubbles: true,
+      cancelBubble: false,
+      cancelable: true,
+      key: "W",
+      keyCode: 87,
+      which: 87,
+      code: "KeyW",
+      location: 0,
+      altKey: false,
+      ctrlKey: false,
+      metaKey: false,
+      shiftKey: false,
+      repeat: false
+    }));
 }
 const elm_anti_afk = document.createElement("div");
 elm_anti_afk.classList.add("toogle", "AntiAFK", "general");
