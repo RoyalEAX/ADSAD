@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name         FPS hack
-// @description  Upgrade your fps in battle
+// @name         Utilities
+// @description  Usefull functions for Tanki Online
 // @version      1.8
 // @author       N3onTechF0X
 // @match        https://*.tankionline.com/*
