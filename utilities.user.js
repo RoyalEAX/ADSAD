@@ -107,7 +107,7 @@ function fps_hack() {
 }
 const elm_fps_hack = document.createElement("div");
 elm_fps_hack.classList.add("toogle", "FPSHack", "general");
-elm_fps_hack.textContent = "FPS hack";
+elm_fps_hack.textContent = "Fake FPS";
 elm_fps_hack.addEventListener("click", () => {
     is_fps_hack = !is_fps_hack
     if (is_fps_hack) {
