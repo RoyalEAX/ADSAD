@@ -27,7 +27,6 @@ elm_open_conts.textContent = "Open Containers",
     });
 // Покупка контейнеров
 let conts_interval, is_conts_buy = !1;
-
 function buy_conts() {
     let e = ["120 ящиков", "Подтвердить", "Закрыть"];
     document.querySelectorAll("span").forEach(t => {
@@ -62,7 +61,6 @@ elm_hide_golds.textContent = "Hide Golds",
     });
 // Анти афк
 let anti_afk_interval, is_anti_afk = !1;
-
 function anti_afk() {
     console.log("anti-afk") /* == TODO == */
 }
@@ -78,7 +76,6 @@ let fps_inner_interval, TO_fps_elm, fake_fps_elm = document.createElement("span"
 fake_fps_elm.classList.add("fake_fps");
 fake_fps_elm.style.color = "rgb(116, 186, 61)";
 fake_fps_elm.style.display = "none";
-
 function fps_hack() {
     TO_fps_elm = document.querySelector(".BattleHudFpsComponentStyle-value");
     if (!TO_fps_elm) {
