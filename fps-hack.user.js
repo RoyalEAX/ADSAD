@@ -1,19 +1,8 @@
 // ==UserScript==
 // @name         FPS hack
 // @description  Upgrade your fps in battle
-// @version      1.4
+// @version      1.8
 // @author       N3onTechF0X
-// @match        https://*.tankionline.com/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=tankionline.com
-// @run-at       document-start
-// @grant        none
-// ==/UserScript==
-
-// ==UserScript==
-// @name         Utilities
-// @description  Some of functions
-// @version      1.5
-// @author       N3onTechF0X, tdsrse
 // @match        https://*.tankionline.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tankionline.com
 // @run-at       document-start
