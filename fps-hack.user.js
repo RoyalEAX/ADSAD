@@ -62,7 +62,7 @@ elm_hide_golds.textContent = "Hide Golds",
 // Анти афк
 let anti_afk_interval, is_anti_afk = !1;
 function anti_afk() {
-    console.log("anti-afk") /* == TODO == */
+    
 }
 const elm_anti_afk = document.createElement("div");
 elm_anti_afk.classList.add("toogle", "AntiAFK", "general");
