@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Utilities
 // @description  Usefull functions for Tanki Online
-// @version      2.2
+// @version      2.3
 // @author       N3onTechF0X, tdsrse
 // @match        https://*.tankionline.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tankionline.com
@@ -157,9 +157,9 @@ fps_container.appendChild(elm_fps_144);
 // Открытие меню
 document.addEventListener("keydown", e => {
     if (e.keyCode === 77 && !document.querySelector("input")) {
-        if (floatingWindow.style.display === "none") {
+        if (floatingWindow.style.display == "none") {
             floatingWindow.style.display = "block";
-            floatingWindow.style.opacity = 1;
+            setTimeout(()=>{floatingWindow.style.opacity = 1}, 0);
         } else {
             floatingWindow.style.opacity = 0;
             setTimeout(()=>{floatingWindow.style.display = "none"}, 500)
