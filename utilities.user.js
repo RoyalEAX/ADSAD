@@ -165,7 +165,6 @@ document.addEventListener("keydown", e => {
             setTimeout(()=>{floatingWindow.style.display = "none"}, 500)
         }
     }
-    77 !== e.keyCode || document.querySelector("input") || (floatingWindow.style.opacity ^= 1, setTimeout(()=>{floating}))
 });
 // Элементы
 floatingWindow.appendChild(elm_open_conts),
