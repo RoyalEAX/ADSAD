@@ -158,11 +158,11 @@ fps_container.appendChild(elm_fps_144);
 document.addEventListener("keydown", e => {
     if (e.keyCode === 77 && !document.querySelector("input")) {
         if (floatingWindow.style.display == "none") {
-            floatingWindow.style.display = "flex";
+            floatingWindow.style.display = "block";
             floatingWindow.style.opacity = 1;
         } else {
             floatingWindow.style.opacity = 1;
-            setTimeout(()=>{floatingWindow.style.display = "none"}, 500)
+            setTimeout(()=>{floatingWindow.style.display = "block"}, 500)
         }
     }
 });
