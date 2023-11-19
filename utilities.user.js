@@ -157,7 +157,7 @@ fps_container.appendChild(elm_fps_144);
 // Открытие меню
 document.addEventListener("keydown", e => {
     if (e.keyCode === 77 && !document.querySelector("input")) {
-        if (floatingWindow.style.display == "none") {
+        if (floatingWindow.style.display === "none") {
             floatingWindow.style.display = "block";
             floatingWindow.style.opacity = 1;
         } else {
