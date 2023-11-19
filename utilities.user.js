@@ -161,8 +161,8 @@ document.addEventListener("keydown", e => {
             floatingWindow.style.display = "block";
             floatingWindow.style.opacity = 1;
         } else {
-            floatingWindow.style.opacity = 1;
-            setTimeout(()=>{floatingWindow.style.display = "block"}, 500)
+            floatingWindow.style.opacity = 0;
+            setTimeout(()=>{floatingWindow.style.display = "none"}, 500)
         }
     }
 });
