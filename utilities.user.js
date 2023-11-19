@@ -153,11 +153,20 @@ elm_fps_144.addEventListener("click", () => {
 const fps_container = document.createElement("div");
 fps_container.style.display = "flex";
 fps_container.appendChild(elm_fps_60),
-    fps_container.appendChild(elm_fps_144),
-    // Открытие меню
-    document.addEventListener("keydown", e => {
-        77 !== e.keyCode || document.querySelector("input") || (floatingWindow.style.opacity ^= 1)
-    });
+fps_container.appendChild(elm_fps_144);
+// Открытие меню
+document.addEventListener("keydown", e => {
+    if (e.keyCode === 77 && !document.querySelector("input")) {
+        if (floatingWindow.style.display == "none") {
+            floatingWindow.style.display = "flex";
+            floatingWindow.style.opacity = 1;
+        } else {
+            floatingWindow.style.opacity = 1;
+            setTimeout(()=>{floatingWindow.style.display = "none"}, 500)
+        }
+    }
+    77 !== e.keyCode || document.querySelector("input") || (floatingWindow.style.opacity ^= 1, setTimeout(()=>{floating}))
+});
 // Элементы
 floatingWindow.appendChild(elm_open_conts),
     floatingWindow.appendChild(document.createElement("p")),
