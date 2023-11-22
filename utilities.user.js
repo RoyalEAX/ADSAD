@@ -102,7 +102,10 @@ elm_anti_afk.textContent = "Anti-AFK",
 let fps_hack_interval, new_fps_state, TO_fps_elm, is_fps_hack = !1;
 function fps_hack() {
     const fpsElement = document.querySelector(".BattleHudFpsComponentStyle-value");
-    if (fpsElement) fpsElement.textContent = new_fps_state
+    if (fpsElement) {
+        fpsElement.textContent = new_fps_state;
+        fpsElement.style.Color = rgb(116, 186, 61);
+    }
     if (is_fps_hack) requestAnimationFrame(fps_hack);
 }
 const elm_fps_hack = document.createElement("div");
