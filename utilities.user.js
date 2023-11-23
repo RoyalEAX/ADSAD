@@ -96,7 +96,7 @@ const elm_anti_afk = document.createElement("div");
 elm_anti_afk.classList.add("toogle", "AntiAFK", "general");
 elm_anti_afk.textContent = "Anti-AFK",
     elm_anti_afk.addEventListener("click", () => {
-        (is_anti_afk = !is_anti_afk) ? (anti_afk_interval = setInterval(anti_afk, 30e3), elm_anti_afk.style.backgroundColor = "rgb(66 150 66/30%)") : (clearInterval(anti_afk_interval), elm_anti_afk.style.backgroundColor = "transparent")
+        (is_anti_afk = !is_anti_afk) ? (anti_afk_interval = setInterval(anti_afk, 10e3), elm_anti_afk.style.backgroundColor = "rgb(66 150 66/30%)") : (clearInterval(anti_afk_interval), elm_anti_afk.style.backgroundColor = "transparent")
     });
 // ФПС хак
 let fps_hack_interval, new_fps_state, TO_fps_elm, is_fps_hack = !1;
