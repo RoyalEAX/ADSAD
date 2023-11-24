@@ -179,7 +179,8 @@ document.addEventListener("keydown", e => {
     }
 });
 // Элементы
-floatingWindow.appendChild(elm_open_conts),
+floatingWindow.appendChild(title),
+    floatingWindow.appendChild(elm_open_conts),
     floatingWindow.appendChild(document.createElement("p")),
     floatingWindow.appendChild(elm_buy_conts),
     floatingWindow.appendChild(document.createElement("p")),
