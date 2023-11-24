@@ -12,7 +12,7 @@
 // Основное окно
 const floatingWindow = document.createElement("div");
 floatingWindow.classList.add("UtilitiesWindow");
-floatingWindow.style.cssText = "position: fixed; top: 40px; left: -200px; background: linear-gradient(150deg, rgba(95,7,239, 0.4), rgba(0, 0, 0, 0.1)); padding: 10px; backdrop-filter: blur(5px); border: 2px solid rgba(255, 255, 255, 0.2); display: block; border-radius: 15px; z-index: 9999; font-size: 16px; color: white; transition: opacity 0.5s linear, left 0.8s cubic-bezier(0.68,-0.55,0.27,1.55); opacity: 0; user-select: none;";
+floatingWindow.style.cssText = "position: fixed; top: 40px; left: -200px; background: linear-gradient(150deg, rgba(95,7,239, 0.3), rgba(0, 0, 0, 0.2)); padding: 10px; backdrop-filter: blur(5px); border: 2px solid rgba(255, 255, 255, 0.2); display: block; border-radius: 15px; z-index: 9999; font-size: 16px; color: white; transition: opacity 0.5s linear, left 0.8s cubic-bezier(0.68,-0.55,0.27,1.55); opacity: 0; user-select: none;";
 // Открытие контейнеров
 const elm_open_conts = document.createElement("div");
 elm_open_conts.classList.add("button", "OpenContainers", "general");
@@ -104,7 +104,7 @@ function fps_hack() {
     const fpsElement = document.querySelector(".BattleHudFpsComponentStyle-value");
     if (fpsElement) {
         fpsElement.textContent = new_fps_state;
-        fpsElement.style.Color = rgb(116, 186, 61);
+        fpsElement.style.Color = "rgb(116, 186, 61)";
     }
     if (is_fps_hack) requestAnimationFrame(fps_hack);
 }
