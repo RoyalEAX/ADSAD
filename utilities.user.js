@@ -76,21 +76,23 @@ function anti_afk() {
       shiftKey: false,
       repeat: false
     }));
-    document.body.dispatchEvent(new KeyboardEvent("keyup", {
-      bubbles: true,
-      cancelBubble: false,
-      cancelable: true,
-      key: "W",
-      keyCode: 87,
-      which: 87,
-      code: "KeyW",
-      location: 0,
-      altKey: false,
-      ctrlKey: false,
-      metaKey: false,
-      shiftKey: false,
-      repeat: false
-    }));
+    setTimeout(()=>{
+        document.body.dispatchEvent(new KeyboardEvent("keyup", {
+          bubbles: true,
+          cancelBubble: false,
+          cancelable: true,
+          key: "W",
+          keyCode: 87,
+          which: 87,
+          code: "KeyW",
+          location: 0,
+          altKey: false,
+          ctrlKey: false,
+          metaKey: false,
+          shiftKey: false,
+          repeat: false
+        }));
+    }, 100)
 }
 const elm_anti_afk = document.createElement("div");
 elm_anti_afk.classList.add("toogle", "AntiAFK", "general");
