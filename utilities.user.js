@@ -181,20 +181,15 @@ document.addEventListener("keydown", e => {
 // Элементы
 floatingWindow.appendChild(title),
     floatingWindow.appendChild(elm_open_conts),
-    floatingWindow.appendChild(document.createElement("p")),
     floatingWindow.appendChild(elm_buy_conts),
-    floatingWindow.appendChild(document.createElement("p")),
     floatingWindow.appendChild(elm_hide_golds),
-    floatingWindow.appendChild(document.createElement("p")),
     floatingWindow.appendChild(elm_anti_afk),
-    floatingWindow.appendChild(document.createElement("p")),
     floatingWindow.appendChild(elm_fps_hack),
-    floatingWindow.appendChild(document.createElement("p")),
     floatingWindow.appendChild(fps_container);
 document.body.appendChild(floatingWindow);
 // CSS
 document.querySelectorAll('.general').forEach(e => {
-    e.style.cssText = "width: 160px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 15px; text-align: center; cursor: pointer; transition: transform 0.3s ease-in-out;";
+    e.style.cssText = "padding: 5px; width: 160px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 15px; text-align: center; cursor: pointer; transition: transform 0.3s ease-in-out;";
     e.addEventListener('mouseover', () => {
         e.style.transform = 'scale(1.05)';
     });
@@ -204,9 +199,6 @@ document.querySelectorAll('.general').forEach(e => {
 });
 document.querySelectorAll('.toogle').forEach(e => {
     e.style.transition += ", background-color 0.5s ease-in-out";
-});
-document.querySelectorAll('p').forEach(e => {
-    e.style.margin = '10px';
 });
 document.querySelectorAll('.switch').forEach(e => {
     e.style.cssText += "width: 60px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.2); text-align: center; cursor: pointer; transition: background-color 0.5s ease-in-out";
