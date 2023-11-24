@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Utilities
 // @description  Usefull functions for Tanki Online
-// @version      2.6
+// @version      2.8
 // @author       N3onTechF0X, tdsrse
 // @match        https://*.tankionline.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tankionline.com
@@ -12,10 +12,10 @@
 // Основное окно
 const floatingWindow = document.createElement("div");
 floatingWindow.classList.add("UtilitiesWindow");
-floatingWindow.style.cssText = "position: fixed; top: 40px; left: -200px; background: linear-gradient(150deg, rgba(95,7,239, 0.3), rgba(0, 0, 0, 0.2)); padding: 0 10px 10px; backdrop-filter: blur(5px); border: 2px solid rgba(255, 255, 255, 0.2); display: block; border-radius: 15px; z-index: 9999; font-size: 16px; color: white; transition: opacity 0.5s linear, left 0.8s cubic-bezier(0.68,-0.55,0.27,1.55); opacity: 0; user-select: none;";
+floatingWindow.style.cssText = "position: fixed; top: 40px; left: 40px; background: linear-gradient(150deg, rgba(95,7,239, 0.3), rgba(0, 0, 0, 0.2)); padding: 0 10px 10px; backdrop-filter: blur(5px); border: 2px solid rgba(255, 255, 255, 0.2); display: block; border-radius: 15px; z-index: 9999; font-size: 16px; color: white; transition: opacity 0.5s, transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); opacity: 0; user-select: none; transform: scale(0);";
 const title = document.createElement("div");
 title.textContent = `Utilities\nN3onTechF0X`;
-title.style.cssText = "width: 160px; text-align: center; padding-bottom: 5px";
+title.style.cssText = "width: 160px; text-align: center; margin-top: 5px; margin-bottom: 5px;";
 // Открытие контейнеров
 const elm_open_conts = document.createElement("div");
 elm_open_conts.classList.add("button", "OpenContainers", "general");
@@ -165,19 +165,39 @@ fps_container.appendChild(elm_fps_144);
 // Открытие меню
 document.addEventListener("keydown", e => {
     if (e.keyCode === 77 && !document.querySelector("input")) {
-        if (floatingWindow.style.left === "40px") {
+        if (floatingWindow.style.opacity === "1") {
             floatingWindow.style.opacity = 0;
-            setTimeout(() => {
-                floatingWindow.style.left = "-200px";
-            }, 0);
+            floatingWindow.style.transform = 'scale(0)';
+            setTimeout(()=>{floatingWindow.style.display = "none";}, 500);
         } else {
-            floatingWindow.style.left = "40px";
-            setTimeout(() => {
+            floatingWindow.style.display = "block";
+            setTimeout(()=>{
                 floatingWindow.style.opacity = 1;
-            }, 400);
+                floatingWindow.style.transform = 'scale(1)';
+            }, 1);
         }
     }
 });
+// Передвижение меню
+let isDragging = false, canDrag = true;
+let offsetX, offsetY;
+function handleDragStart(e) {
+  const target = e.target;
+  if (target.classList.contains('button') || target.classList.contains('toogle') || target.classList.contains('switch')) {
+    canDrag = false;
+    return;
+  }
+  canDrag = true, isDragging = true;
+  offsetX = e.clientX - floatingWindow.getBoundingClientRect().left, offsetY = e.clientY - floatingWindow.getBoundingClientRect().top;
+}
+function handleDragMove(e) {
+  if (!isDragging || !canDrag) return;
+  floatingWindow.style.left = `${e.clientX - offsetX}px`;
+  floatingWindow.style.top = `${e.clientY - offsetY}px`;
+}
+floatingWindow.addEventListener('mousedown', handleDragStart);
+document.addEventListener('mousemove', handleDragMove);
+document.addEventListener('mouseup', ()=>{isDragging = false});
 // Элементы
 floatingWindow.appendChild(title),
     floatingWindow.appendChild(elm_open_conts),
@@ -189,7 +209,7 @@ floatingWindow.appendChild(title),
 document.body.appendChild(floatingWindow);
 // CSS
 document.querySelectorAll('.general').forEach(e => {
-    e.style.cssText = "padding: 5px; width: 160px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 15px; text-align: center; cursor: pointer; transition: transform 0.3s ease-in-out;";
+    e.style.cssText = "margin: 5px; width: 160px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 15px; text-align: center; cursor: pointer; transition: transform 0.3s ease-in-out;";
     e.addEventListener('mouseover', () => {
         e.style.transform = 'scale(1.05)';
     });
