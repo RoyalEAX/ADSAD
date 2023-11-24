@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Utilities
 // @description  Usefull functions for Tanki Online
-// @version      2.5
+// @version      2.6
 // @author       N3onTechF0X, tdsrse
 // @match        https://*.tankionline.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tankionline.com
