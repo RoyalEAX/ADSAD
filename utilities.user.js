@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Utilities
 // @description  Usefull functions for Tanki Online
-// @version      2.8
+// @version      2.9
 // @author       N3onTechF0X, tdsrse
 // @match        https://*.tankionline.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tankionline.com
@@ -109,7 +109,7 @@ function fps_hack() {
     const fpsElement = document.querySelector(".BattleHudFpsComponentStyle-value");
     if (fpsElement) {
         fpsElement.textContent = new_fps_state;
-        fpsElement.style.Color = "rgb(116, 186, 61)";
+        fpsElement.style.color = "rgb(116, 186, 61)";
     }
     if (is_fps_hack) requestAnimationFrame(fps_hack);
 }
