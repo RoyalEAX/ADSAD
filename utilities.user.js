@@ -31,7 +31,7 @@ elm_open_conts.textContent = "Open Containers",
 // Покупка контейнеров
 let conts_interval, is_conts_buy = !1;
 function buy_conts() {
-    let e = ["120 ящиков", "Подтвердить", "Закрыть"];
+    let e = ["120 ключей", "Подтвердить", "Закрыть"];
     document.querySelectorAll("span").forEach(t => {
         e.includes(t.textContent) && t.click()
     })
