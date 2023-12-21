@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Utilities
 // @description  Usefull functions for Tanki Online
-// @version      2.9
+// @version      3.0
 // @author       N3onTechF0X | css by tdsrse
 // @match        https://*.tankionline.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tankionline.com
@@ -31,7 +31,7 @@ elm_open_conts.textContent = "Open Containers",
 // Покупка контейнеров
 let conts_interval, is_conts_buy = !1;
 function buy_conts() {
-    let e = ["120 ключей", "Подтвердить", "Закрыть"];
+    let e = ["240 ключей", "Подтвердить", "Закрыть"];
     document.querySelectorAll("span").forEach(t => {
         e.includes(t.textContent) && t.click()
     })
