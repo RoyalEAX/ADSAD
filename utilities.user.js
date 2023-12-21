@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Utilities
 // @description  Usefull functions for Tanki Online
-// @version      3.0
+// @version      3.1
 // @author       N3onTechF0X | css by tdsrse
 // @match        https://*.tankionline.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tankionline.com
@@ -164,7 +164,7 @@ fps_container.appendChild(elm_fps_60),
 fps_container.appendChild(elm_fps_144);
 // Открытие меню
 document.addEventListener("keydown", e => {
-    if (e.keyCode === 77 && !document.querySelector("input")) {
+    if (e.keyCode === 77 && (document.querySelector(".PromoCodesComponentStyle-sendButton") || !document.querySelector("input"))) {
         if (floatingWindow.style.opacity === "1") {
             floatingWindow.style.opacity = 0;
             floatingWindow.style.transform = 'scale(0)';
