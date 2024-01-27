@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Renda
-// @description  Powerfull clicker for Tanki Online
+// @description  Powerful clicker for Tanki Online
 // @version      0.9
 // @author       N3onTechF0X
 // @match        https://*.tankionline.com/*
