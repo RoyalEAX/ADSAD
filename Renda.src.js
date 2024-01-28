@@ -137,7 +137,7 @@ addEventListener("cheat-base-ready", cheatBase => {
                 .classList.toggle("toogle_on", unsafeWindow.RendaConfig.mine);
             document.querySelector(".svg-mine")
                 .classList.toggle("toogle_off", !unsafeWindow.RendaConfig.mine);
-        } else if (e.code === "Semilicon") {
+        } else if (e.code === "Semicolon") {
             unsafeWindow.RendaConfig.damage = !unsafeWindow.RendaConfig.damage;
             document.querySelector(".svg-damage").classList.toggle("toogle_on", unsafeWindow.RendaConfig.damage);
             document.querySelector(".svg-damage").classList.toggle("toogle_off", !unsafeWindow.RendaConfig.damage);
