@@ -7,6 +7,7 @@
 // @icon         https://cdn.discordapp.com/attachments/1154469342671548456/1200608934331961464/N3onTechF0X.png
 // @run-at       document-start
 // @grant        GM_xmlhttpRequest
+// @grant        unsafeWindow
 // @connect      raw.githubusercontent.com
 // ==/UserScript==
 /*ATTENTION: script use CheatBase*/
