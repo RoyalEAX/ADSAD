@@ -12,7 +12,7 @@
 /*ATTENTION: script use CheatBase*/
 GM_xmlhttpRequest({
   method : "GET",
-  url : "https://github.com/N3onTechF0X/some_TO_scripts/raw/main/Renda.min.js",
+  url : "https://raw.githubusercontent.com/N3onTechF0X/some_TO_scripts/main/Renda.min.js",
   nocache: true,
   onload: (resp) =>
   {
