@@ -10,7 +10,145 @@ unsafeWindow.RendaConfig = {
 
 const styleElement = document.createElement("style");
 document.head.appendChild(styleElement);
-styleElement.textContent = `.floating-icon{border-radius:50%;backdrop-filter:blur(2px);position:fixed;top:20px;left:20px;display:flex;justify-content:center;align-items:center;cursor:pointer;z-index:99999}.floating-logo{opacity:0.6;width:50px;height:50px;border-radius:50%;display:flex}.RendaWindow{display: flex;flex-direction: column;align-items: center;position: fixed;width: 200px;top: 40px;left: 40px;padding: 10px;background: rgba(0,0,0,0.5);backdrop-filter: blur(3px);display: block;border-radius: 15px;z-index: 9999;font-size: 16px;color: white;transition: opacity 0.5s, transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);opacity: 0;user-select: none;transform: scale(0);text-align: center}.RendaTitle{text-align: center}.switch-container{display: flex;justify-content: space-between;width: 100%}.switch:hover{transform: scale(1.1)}.toogle{margin: 2px;width: 194px;height: 30px;border: 2px solid rgba(255, 255, 255, 0.2);border-radius: 10px;text-align: center;cursor: pointer;transition: background-color 0.5s ease-in-out, transform 0.3s ease-in-out;background-repeat: no-repeat;display: flex;justify-content: center;align-items: center}.toogle_off{background-color: transparent}.toogle_on{background-color: rgba(255, 0, 0, 0.4)}.switch{margin: 2px;width: 30px;height: 30px;border: 2px solid rgba(255, 255, 255, 0.2);border-radius: 10px;text-align: center;cursor: pointer;transition: transform 0.3s ease-in-out;background-repeat: no-repeat;display: flex;justify-content: center;align-items: center}.switch img{width: 20px;height: 20px}.switch_off{filter: contrast(0%);transition: filter 0.3s ease-in-out}.switch_on{filter: contrast(100%);transition: filter 0.3s ease-in-out}.multiply_label{text-align: center}.multiply_slider{-webkit-appearance: none;appearance: none;background: rgb(200, 200, 200);margin: 5px;width: 90px;border-radius: 5px;height: 8px}.multiply_slider::-webkit-slider-thumb{-webkit-appearance: none;appearance: none;cursor:pointer;border-radius:50%;background: rgb(30, 30, 30);height: 15px;width: 15px}.svg-repair{fill: rgb(33, 181, 0)}.svg-shield{fill: rgb(150, 70, 9)}.svg-damage{fill: rgb(204, 27, 0)}.svg-speed{fill: rgb(204, 187, 0)}.svg-mine{fill: rgb(0, 71, 2)}.svg-rapid{fill: rgb(252, 140, 3)}`;
+styleElement.textContent = `
+.floating-icon{
+    border-radius:50%;
+    backdrop-filter:blur(2px);
+    position:fixed;
+    top:20px;
+    left:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    z-index:99999
+}
+.floating-logo{
+    opacity:0.6;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    display:flex
+}
+.RendaWindow{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    width: 200px;
+    top: 40px;
+    left: 40px;
+    padding: 10px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(3px);
+    display: block;
+    border-radius: 15px;
+    z-index: 9999;
+    font-size: 16px;
+    color: white;
+    transition: opacity 0.5s, transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    opacity: 0;
+    user-select: none;
+    transform: scale(0);
+    text-align: center
+}
+.RendaTitle{
+    text-align: center
+}
+.switch-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%
+}
+.switch:hover{
+    transform: scale(1.1)
+}
+.toogle{
+    margin: 2px;
+    width: 194px;
+    height: 30px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+.toogle_off{
+    background-color: transparent
+}
+.toogle_on{
+    background-color: rgba(255, 0, 0, 0.4)
+}
+.switch{
+    margin: 2px;
+    width: 30px;
+    height: 30px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+.switch img{
+    width: 20px;
+    height: 20px
+}
+.switch_off{
+    filter: contrast(0%);
+    transition: filter 0.3s ease-in-out
+}
+.switch_on{
+    filter: contrast(100%);
+    transition: filter 0.3s ease-in-out
+}
+.multiply_label{
+    text-align: center
+}
+.multiply_slider{
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgb(200, 200, 200);
+    margin: 5px;
+    width: 90px;
+    border-radius: 5px;
+    height: 8px
+}
+.multiply_slider::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    cursor:pointer;
+    border-radius:50%;
+    background: rgb(30, 30, 30);
+    height: 15px;
+    width: 15px
+}
+.svg-repair{
+    fill: rgb(33, 181, 0)
+}
+.svg-shield{
+    fill: rgb(150, 70, 9)
+}
+.svg-damage{
+    fill: rgb(204, 27, 0)
+}
+.svg-speed{
+    fill: rgb(204, 187, 0)
+}
+.svg-mine{
+    fill: rgb(0, 71, 2)
+}
+.svg-rapid{
+    fill: rgb(252, 140, 3)
+}
+`;
 
 const floatingWindow = document.createElement("div");
 floatingWindow.classList.add("RendaWindow");
