@@ -1,6 +1,3 @@
-какие можешь дать советы по улучшению кода?
-
-
 unsafeWindow.RendaConfig = {
     multiply: 1,
     repair: !1,
