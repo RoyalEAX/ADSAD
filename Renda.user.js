@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         Renda
 // @description  Powerful clicker for Tanki Online
-// @version      1.5
+// @version      1.6
 // @author       N3onTechF0X
 // @match        https://*.tankionline.com/*
 // @icon         https://cdn.discordapp.com/attachments/1154469342671548456/1200608934331961464/N3onTechF0X.png
 // @run-at       document-start
 // @grant        GM_xmlhttpRequest
 // @grant        unsafeWindow
-// @connect      raw.githubusercontent.com
+// @connect      https://github.com/N3onTechF0X/Renda/raw/main/Renda.src.js
 // ==/UserScript==
 /*ATTENTION: script use CheatBase*/
-GM_xmlhttpRequest({method:"GET",url:"https://raw.githubusercontent.com/N3onTechF0X/some_TO_scripts/main/Renda.min.js",nocache:!0,onload:resp=>{eval(resp.responseText)}});
+GM_xmlhttpRequest({method:"GET",url:"https://github.com/N3onTechF0X/Renda/raw/main/Renda.src.js",nocache:!0,onload:resp=>{eval(resp.responseText)}});
