@@ -6,7 +6,7 @@ unsafeWindow.RendaConfig = {
     speed: !1,
     mine: !1,
     rapid: !1
-}
+};
 
 const styleElement = document.createElement("style");
 document.head.appendChild(styleElement);
