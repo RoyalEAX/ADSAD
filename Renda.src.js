@@ -1,11 +1,37 @@
 unsafeWindow.RendaConfig = {
     multiply: 1,
-    repair: !1,
-    shield: !1,
-    damage: !1,
-    speed: !1,
-    mine: !1,
-    rapid: !1
+    delay: 50,
+    repair: {
+        enabled: !1,
+        sound_on: "Аптека включена",
+        sound_off: "Аптека выключена",
+    },
+    shield: {
+        enabled: !1,
+        sound_on: "Защита включена",
+        sound_off: "Защита выключена",
+    },
+    damage: {
+        enabled: !1,
+        sound_on: "Урон включён",
+        sound_off: "Урон выключен",
+    },
+    speed: {
+        enabled: !1,
+        sound_on: "Скорость включена",
+        sound_off: "Скорость выключена",
+    },
+    mine: {
+        enabled: !1,
+        sound_on: "Мины включены",
+        sound_off: "Мины выключены",
+    },
+    rapid: {
+        enabled: !1,
+        sound_on: "Рапид включён",
+        sound_off: "Рапид выключен",
+    },
+    sound: !1
 };
 
 const styleElement = document.createElement("style");
@@ -60,19 +86,23 @@ styleElement.textContent = `
     justify-content: space-between;
     width: 100%
 }
+.toogle_container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%
+}
 .switch:hover{
-    transform: scale(1.1)
+    transform: scale(1.05)
 }
 .toogle{
     margin: 2px;
-    width: 194px;
+    width: 153px;
     height: 30px;
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
     transition: background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
-    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center
@@ -92,7 +122,6 @@ styleElement.textContent = `
     text-align: center;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
-    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center
@@ -112,7 +141,7 @@ styleElement.textContent = `
 .multiply_label{
     text-align: center
 }
-.multiply_slider{
+.renda_slider{
     -webkit-appearance: none;
     appearance: none;
     background: rgb(200, 200, 200);
@@ -121,7 +150,7 @@ styleElement.textContent = `
     border-radius: 5px;
     height: 8px
 }
-.multiply_slider::-webkit-slider-thumb{
+.renda_slider::-webkit-slider-thumb{
     -webkit-appearance: none;
     appearance: none;
     cursor:pointer;
@@ -129,24 +158,6 @@ styleElement.textContent = `
     background: rgb(30, 30, 30);
     height: 15px;
     width: 15px
-}
-.svg_repair{
-    fill: rgb(33, 181, 0)
-}
-.svg_shield{
-    fill: rgb(150, 70, 9)
-}
-.svg_damage{
-    fill: rgb(204, 27, 0)
-}
-.svg_speed{
-    fill: rgb(204, 187, 0)
-}
-.svg_mine{
-    fill: rgb(0, 71, 2)
-}
-.svg_rapid{
-    fill: rgb(252, 140, 3)
 }
 `;
 
@@ -161,7 +172,20 @@ floatingWindow.appendChild(title);
 const switchContainer = document.createElement("div");
 switchContainer.classList.add("switch_container");
 
-const createSwitch = (imageSrc, option) => {
+const toogleSwitch = (element, option) => {
+    unsafeWindow.RendaConfig[option].enabled = !unsafeWindow.RendaConfig[option].enabled;
+    if (unsafeWindow.RendaConfig.sound) {
+        let speech = new SpeechSynthesisUtterance();
+        speech.text = unsafeWindow.RendaConfig[option][unsafeWindow.RendaConfig[option].enabled ? "sound_on" : "sound_off"];
+        speech.rate=2.5;
+        speech.voice=speechSynthesis.getVoices()[4];
+        speechSynthesis.speak(speech);
+    }
+    element.classList.toggle("switch_on", unsafeWindow.RendaConfig[option].enabled);
+    element.classList.toggle("switch_off", !unsafeWindow.RendaConfig[option].enabled);
+}
+
+const createSwitch = (imageSrc, option, custom, toogle) => {
     const switchElement = document.createElement("div");
     switchElement.classList.add("switch");
 
@@ -171,9 +195,12 @@ const createSwitch = (imageSrc, option) => {
     switchElement.appendChild(imgElement);
 
     switchElement.addEventListener("click", () => {
-        unsafeWindow.RendaConfig[option] = !unsafeWindow.RendaConfig[option];
-        imgElement.classList.toggle("switch_on", unsafeWindow.RendaConfig[option]);
-        imgElement.classList.toggle("switch_off", !unsafeWindow.RendaConfig[option]);
+        if (custom) {
+          if (imgElement.src == imageSrc) imgElement.src = custom;
+          else imgElement.src = imageSrc;
+        }
+        if (toogle) toogle();
+        else toogleSwitch(imgElement, option);
     });
 
     return switchElement;
@@ -203,18 +230,40 @@ switches.forEach(switchInfo => {
 });
 floatingWindow.appendChild(switchContainer);
 
+const toogleContainer = document.createElement("div");
+toogleContainer.classList.add("toogle_container");
+
 const rapidElement = document.createElement("div");
 rapidElement.classList.add("toogle");
 rapidElement.textContent = "Rapid update";
 rapidElement.addEventListener("click", () => {
-    unsafeWindow.RendaConfig.rapid = !unsafeWindow.RendaConfig.rapid;
-    rapidElement.classList.toggle("toogle_on", unsafeWindow.RendaConfig.rapid);
-    rapidElement.classList.toggle("toogle_off", !unsafeWindow.RendaConfig.rapid);
+    unsafeWindow.RendaConfig.rapid.enabled = !unsafeWindow.RendaConfig.rapid.enabled;
+    if (unsafeWindow.RendaConfig.sound) {
+        let speech = new SpeechSynthesisUtterance();
+        speech.text = unsafeWindow.RendaConfig.rapid[unsafeWindow.RendaConfig.rapid.enabled ? "sound_on" : "sound_off"];
+        speech.rate=2.5;
+        speech.voice=speechSynthesis.getVoices()[4];
+        speechSynthesis.speak(speech);
+    }
+    rapidElement.classList.toggle("toogle_on", unsafeWindow.RendaConfig.rapid.enabled);
+    rapidElement.classList.toggle("toogle_off", !unsafeWindow.RendaConfig.rapid.enabled);
 });
-floatingWindow.appendChild(rapidElement);
+toogleContainer.appendChild(rapidElement);
+
+const soundElement = createSwitch(
+    "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBTVkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xzIC0tPg0KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTQgMy4wMDAwMUMxNCAxLjA3Nzk5IDExLjU1MzIgMC4yNjIzNzYgMTAuNCAxLjhMNi41IDdINEMyLjM0MzE1IDcgMSA4LjM0MzE1IDEgMTBWMTRDMSAxNS42NTY5IDIuMzQzMTUgMTcgNCAxN0g2LjQ5MzU2TDEwLjM4NzggMjIuMzA0OUMxMS41MzEzIDIzLjg2MjcgMTQgMjMuMDUzOSAxNCAyMS4xMjE0VjMuMDAwMDFaTTguMSA4LjJMMTIgM1YyMS4xMjE0TDguMTA1ODEgMTUuODE2NUM3LjcyOTAxIDE1LjMwMzIgNy4xMzAzMSAxNSA2LjQ5MzU2IDE1SDRDMy40NDc3MiAxNSAzIDE0LjU1MjMgMyAxNFYxMEMzIDkuNDQ3NzIgMy40NDc3MiA5IDQgOUg2LjVDNy4xMjk1MSA5IDcuNzIyMjkgOC43MDM2MSA4LjEgOC4yWiIgZmlsbD0iIzBGMEYwRiIvPg0KPHBhdGggZD0iTTIxLjI5MjkgOC41NzA5NEMyMS42ODM0IDguMTgwNDEgMjIuMzE2NiA4LjE4MDQyIDIyLjcwNzEgOC41NzA5NEMyMy4wOTc2IDguOTYxNDYgMjMuMDk3NiA5LjU5NDYzIDIyLjcwNzEgOS45ODUxNUwyMC43NjAzIDExLjkzMTlMMjIuNzA3MSAxMy44Nzg3QzIzLjA5NzYgMTQuMjY5MiAyMy4wOTc2IDE0LjkwMjQgMjIuNzA3MSAxNS4yOTI5QzIyLjMxNjYgMTUuNjgzNCAyMS42ODM0IDE1LjY4MzQgMjEuMjkyOSAxNS4yOTI5TDE5LjM0NjEgMTMuMzQ2MUwxNy4zOTk0IDE1LjI5MjlDMTcuMDA4OCAxNS42ODM0IDE2LjM3NTcgMTUuNjgzNCAxNS45ODUyIDE1LjI5MjlDMTUuNTk0NiAxNC45MDIzIDE1LjU5NDYgMTQuMjY5MiAxNS45ODUyIDEzLjg3ODdMMTcuOTMxOSAxMS45MzE5TDE1Ljk4NTIgOS45ODUxN0MxNS41OTQ2IDkuNTk0NjQgMTUuNTk0NiA4Ljk2MTQ4IDE1Ljk4NTIgOC41NzA5NkMxNi4zNzU3IDguMTgwNDMgMTcuMDA4OCA4LjE4MDQzIDE3LjM5OTQgOC41NzA5NkwxOS4zNDYxIDEwLjUxNzdMMjEuMjkyOSA4LjU3MDk0WiIgZmlsbD0iIzBGMEYwRiIvPg0KPC9zdmc+",
+    "sound",
+    "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiPgoJPHRpdGxlPnNvdW5kLXN2Z3JlcG8tY29tLXN2ZzwvdGl0bGU+Cgk8ZGVmcz4KCQk8aW1hZ2UgIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMyIgaWQ9ImltZzEiIGhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBQllBQUFBWENBTUFBQUE0Tmsrc0FBQUFBWE5TUjBJQjJja3Nmd0FBQVFoUVRGUkZEdzhQQUFBQUt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZaS3RmWkt0ZlpLdGZac0NPN0tBQUFBRmgwVWs1VEFBQkwzYzlFTVBqLzJRcmZvS1BhRGFlK1EyVDNLNWRyWmVra2RvK01iZ0Y5NkZXdVhJNmtDejdJT01ickxTamVIdUVYN0EvdUNRY0YrUVQ2N1F6d0xCMGo0SWRBeEh2cVZLeGlabzFxbUdkNVFkWk4zRVVRQ013d0RoOEFBQUVEU1VSQlZIaWNYWkZuVzhKQUVJUjNSR0drcTBHRERUQmlSU3lBaWhvYmlyMjMvLzlQekYwdThjeDgydWU5dmJ2WkhaRlF3RWhxZEF6eVgwQTZRNDVEeThMWkhQTWtVQ2lXWURXWFdjd3FQTUhKK0FJd1JhY0NoYWM1QTdjNksvcTFpa01YR3M5eEhndGNsRnE5d1VCbGhIaUpIcFpaa0thQ3pzb3FST00xcm1PRG05TGlsckdsY1p2YjJPR3VxTnJZVWVVZU8raXlwN0JZZUo4T0RwaEo0a1AyY2NUajVDTmRuc0RucVRSNFpuOTV6aFF1ZUNtRDBLQnZjR0FPVjd5VzJ2QkdIWGhtbkZ2ZTRaNzVlUGlIYVBoSE5QbGtWdVZHcTNybUMxN1pqaGJyeFl0OXM1SkF5Y1F3ZlBmdGRKRHVNL0NXQ0MzZ0g2M1ByMlRFaW4vLy9EWCtBc1c3RndqYnJURzJBQUFBQUVsRlRrU3VRbUNDIi8+Cgk8L2RlZnM+Cgk8c3R5bGU+Cgk8L3N0eWxlPgoJPHVzZSBpZD0iTGF5ZXIiIGhyZWY9IiNpbWcxIiB4PSIxIiB5PSIxIi8+Cjwvc3ZnPg==",
+    ()=>{
+        unsafeWindow.RendaConfig.sound = !unsafeWindow.RendaConfig.sound;
+    }
+);
+toogleContainer.appendChild(soundElement);
+
+floatingWindow.appendChild(toogleContainer);
 
 const multiplySlider = document.createElement("input");
-multiplySlider.classList.add("multiply_slider");
+multiplySlider.classList.add("renda_slider");
 multiplySlider.type = "range";
 multiplySlider.min = 1;
 multiplySlider.max = 10;
@@ -228,7 +277,23 @@ multiplyLabel.textContent = `Multiply: ${unsafeWindow.RendaConfig.multiply}`;
 setInterval(() => {
     multiplyLabel.textContent = `Multiply: ${unsafeWindow.RendaConfig.multiply}`
 }, 100);
-floatingWindow.appendChild(multiplyLabel);
+
+const delaySlider = document.createElement("input");
+delaySlider.classList.add("renda_slider");
+delaySlider.type = "range";
+delaySlider.min = 0;
+delaySlider.max = 300;
+delaySlider.step = 5;
+delaySlider.value = unsafeWindow.RendaConfig.delay;
+delaySlider.addEventListener("input", (e) => {
+    unsafeWindow.RendaConfig.delay = parseInt(e.target.value);
+});
+
+const delayLabel = document.createElement("span");
+delayLabel.textContent = `Delay: ${unsafeWindow.RendaConfig.delay}`;
+setInterval(() => {
+    delayLabel.textContent = `Delay: ${unsafeWindow.RendaConfig.delay}`
+}, 100);
 
 const floatingIcon = document.createElement("div");
 floatingIcon.classList.add("floating_icon");
@@ -250,7 +315,10 @@ function isPhone() {
 }
 
 function openMenu() {
+    floatingWindow.appendChild(multiplyLabel);
     floatingWindow.appendChild(multiplySlider);
+    floatingWindow.appendChild(delayLabel);
+    floatingWindow.appendChild(delaySlider);
     floatingWindow.style.display = "block";
     setTimeout(() => {
         floatingWindow.style.opacity = 1;
@@ -259,24 +327,29 @@ function openMenu() {
 }
 
 function closeMenu() {
+    floatingWindow.removeChild(multiplyLabel);
     floatingWindow.removeChild(multiplySlider);
+    floatingWindow.removeChild(delayLabel);
+    floatingWindow.removeChild(delaySlider);
     floatingWindow.style.opacity = 0;
     floatingWindow.style.transform = "scale(0)";
     setTimeout(() => {
         floatingWindow.style.display = "none";
     }, 500);
 }
-
+let lastClickTime = Date.now();
 addEventListener("cheat-base-ready", cheatBase => {
     cheatBase.runAfterPhysicsUpdate.push(() => {
-        unsafeWindow.RendaConfig.repair && cheatBase.features.supplies.activateSupplyByName("FIRST_AID");
-        unsafeWindow.RendaConfig.shield && cheatBase.features.supplies.activateSupplyByName("DOUBLE_ARMOR");
-        unsafeWindow.RendaConfig.damage && cheatBase.features.supplies.activateSupplyByName("DOUBLE_DAMAGE");
-        unsafeWindow.RendaConfig.speed && cheatBase.features.supplies.activateSupplyByName("NITRO");
+        if (Date.now() - lastClickTime < unsafeWindow.RendaConfig.delay) return;
+        unsafeWindow.RendaConfig.repair.enabled && cheatBase.features.supplies.activateSupplyByName("FIRST_AID");
+        unsafeWindow.RendaConfig.shield.enabled && cheatBase.features.supplies.activateSupplyByName("DOUBLE_ARMOR");
+        unsafeWindow.RendaConfig.damage.enabled && cheatBase.features.supplies.activateSupplyByName("DOUBLE_DAMAGE");
+        unsafeWindow.RendaConfig.speed.enabled && cheatBase.features.supplies.activateSupplyByName("NITRO");
         for (let i = 0; i < unsafeWindow.RendaConfig.multiply; i++) {
-            unsafeWindow.RendaConfig.rapid && cheatBase.gameClasses.localPlayer.send(new FullStateCorrectionMessage);
-            unsafeWindow.RendaConfig.mine && cheatBase.features.supplies.activateSupplyByName("MINE");
+            unsafeWindow.RendaConfig.rapid.enabled && cheatBase.gameClasses.localPlayer.send(new FullStateCorrectionMessage);
+            unsafeWindow.RendaConfig.mine.enabled && cheatBase.features.supplies.activateSupplyByName("MINE");
         }
+        lastClickTime = Date.now();
     });
     document.addEventListener("keyup", ({code}) => {
         if (cheatBase.features.battleChat.isInputActive()) return;
@@ -285,23 +358,18 @@ addEventListener("cheat-base-ready", cheatBase => {
                 floatingWindow.style.opacity === "1" ? closeMenu() : openMenu();
                 break;
             case "Quote":
-                unsafeWindow.RendaConfig.mine = !unsafeWindow.RendaConfig.mine;
-                document.querySelector(".svg_mine").classList.toggle("toogle_on", unsafeWindow.RendaConfig.mine);
-                document.querySelector(".svg_mine").classList.toggle("toogle_off", !unsafeWindow.RendaConfig.mine);
+                toogleSwitch(document.querySelector(".svg_mine"), "mine")
                 break;
             case "Semicolon":
-                unsafeWindow.RendaConfig.damage = !unsafeWindow.RendaConfig.damage;
-                document.querySelector(".svg_damage").classList.toggle("toogle_on", unsafeWindow.RendaConfig.damage);
-                document.querySelector(".svg_damage").classList.toggle("toogle_off", !unsafeWindow.RendaConfig.damage);
-                unsafeWindow.RendaConfig.shield = !unsafeWindow.RendaConfig.shield;
-                document.querySelector(".svg_shield").classList.toggle("toogle_on", unsafeWindow.RendaConfig.shield);
-                document.querySelector(".svg_shield").classList.toggle("toogle_off", !unsafeWindow.RendaConfig.shield);
-                unsafeWindow.RendaConfig.speed = !unsafeWindow.RendaConfig.speed;
-                document.querySelector(".svg_speed").classList.toggle("toogle_on", unsafeWindow.RendaConfig.speed);
-                document.querySelector(".svg_speed").classList.toggle("toogle_off", !unsafeWindow.RendaConfig.speed);
+                toogleSwitch(document.querySelector(".svg_shield"), "shield")
+                toogleSwitch(document.querySelector(".svg_damage"), "damage")
+                toogleSwitch(document.querySelector(".svg_speed"), "speed")
                 break;
         }
     });
+    let speech = new SpeechSynthesisUtterance();
+    speech.voice=speechSynthesis.getVoices()[4];
+    speechSynthesis.speak(speech);
 });
 
 let offsetX, offsetY, offsetXIcon, offsetYIcon, isDragging = false, isIconDragging = false, canDrag = true;
@@ -322,7 +390,7 @@ if (isPhone()) {
         }
     });
     floatingWindow.addEventListener("touchstart", ({touches, target}) => {
-        if (target.classList.contains("multiply_slider")) {
+        if (target.classList.contains("renda_slider")) {
             canDrag = false;
             return;
         }
@@ -335,7 +403,7 @@ if (isPhone()) {
     });
 } else {
     floatingWindow.addEventListener("mousedown", ({target, clientX, clientY}) => {
-        if (target.classList.contains("switch") || target.classList.contains("multiply_slider") || target.classList.contains("toogle")) {
+        if (target.classList.contains("switch") || target.classList.contains("renda_slider") || target.classList.contains("toogle")) {
             canDrag = false;
             return;
         }
