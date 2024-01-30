@@ -340,7 +340,9 @@ function closeMenu() {
 let lastClickTime = Date.now();
 addEventListener("cheat-base-ready", cheatBase => {
     cheatBase.runAfterPhysicsUpdate.push(() => {
-        if (Date.now() - lastClickTime < unsafeWindow.RendaConfig.delay) return;
+        if (unsafeWindow.RendaConfig.delay != 0) {
+            if (Date.now() - lastClickTime < unsafeWindow.RendaConfig.delay) return;
+        }
         unsafeWindow.RendaConfig.repair.enabled && cheatBase.features.supplies.activateSupplyByName("FIRST_AID");
         unsafeWindow.RendaConfig.shield.enabled && cheatBase.features.supplies.activateSupplyByName("DOUBLE_ARMOR");
         unsafeWindow.RendaConfig.damage.enabled && cheatBase.features.supplies.activateSupplyByName("DOUBLE_DAMAGE");
